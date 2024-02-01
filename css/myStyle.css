@@ -1,0 +1,332 @@
+body {
+    font-family: 'Changa One', arial, serif;
+    overflow: hidden;
+}
+
+#full-screen {
+    background-image: url("../images/hero.jpg");
+    background-size: 100% 100%;
+    background-repeat:no-repeat;
+    background-position:center;
+    height: 100vh;
+}
+
+/* Extra Padding for Hover Effect */
+#scene{
+    padding: 80px;
+}
+
+/* Element Faded in with Scroll Reveal */
+.flex-grow-1{
+    visibility: hidden;
+}
+
+/* Buttons */
+.add-button {
+    position: absolute;
+    right: 42.5%;
+    bottom: 50%;
+    width: 55px;
+    height: 55px;
+    font-size: 28px;
+    color: rgba(255,255,255,1);
+    border-radius: 50%;
+    overflow: visible;
+}
+  
+.add-button:before {
+position: absolute;
+top: -22.5%;
+left: -22.5%;
+background-color:#ff4081;
+width: 80px;
+height: 80px;
+line-height: 80px;
+content:"Start";
+border-radius: 50%;
+z-index: 2;
+cursor: pointer;
+}
+
+.add-button:after {
+    display: none;
+    position: absolute;
+    top: -22.5%;
+    left: -22.5%;
+    background-color:#ff4081;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 50%;
+    content: "Watch";
+    z-index: 2;
+    cursor: pointer;
+    }
+
+.sub-button {
+position: absolute;
+color: rgba(255,255,255,0);
+width: 0px;
+height: 0px;
+transition: 
+    top .2s cubic-bezier(.58,-0.37,.45,1.46) .5s,
+    left .2s cubic-bezier(.58,-0.37,.45,1.46) .5s,
+    bottom .2s cubic-bezier(.58,-0.37,.45,1.46) .5s,
+    right .2s cubic-bezier(.58,-0.37,.45,1.46) .5s,
+    width .2s cubic-bezier(.58,-0.37,.45,1.46) .5s,
+    height .2s cubic-bezier(.58,-0.37,.45,1.46) .5s;
+}
+    
+.tl {
+top: 0;
+left: 0;
+}
+
+.tr {  
+top: 0;
+right: 0;
+}
+
+.bl {
+bottom: 0;
+left: 0; 
+}
+
+.br { 
+bottom: 0;
+right: 0;
+}
+
+/* Text in Buttons */
+a {
+    width: 100%;
+    height: 100%;
+    /* font-size: 0; */
+    line-height: 1;
+    color: white;
+    visibility: hidden;
+    opacity: 0;
+    transition: 
+    visibility .2s cubic-bezier(.58,-0.37,.45,1.46) .5s, 
+    opacity .2s cubic-bezier(.58,-0.37,.45,1.46) .5s;
+}
+a:active,
+a:hover {
+    color: white;
+}
+
+/* Button before element to display discriptive text, fade in */
+a:before {
+    content: attr(data-hover);
+    color: white;
+    position: relative;
+    display: none;
+    line-height: 1;
+}
+
+/* Hover the Center Element Effects */
+#scene:hover .add-button { 
+transform: rotate(45deg);
+}
+
+#scene:hover .add-button:before {
+    display: none;
+}
+
+#scene:hover .add-button:after {
+    display: block;
+    transform: rotate(-45deg);
+}
+  
+#scene:hover .sub-button {
+width: 200px;
+height: 200px;
+transform: rotate(-45deg);
+color: rgba(255,255,255,1);
+border-radius: 200px;
+}
+
+#scene:hover a{
+    visibility: visible;
+    opacity: 1;
+}
+
+#scene:hover .tl {
+top: -200px;
+left: -200px;
+box-shadow: 0 0 0 1px rgb(185, 102, 0) inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 rgb(185, 102, 0), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+background-color: orange;
+}
+  
+#scene:hover .tr {  
+top: -200px;
+right: -200px;
+box-shadow: 0 0 0 1px darkred inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 darkred, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+background-color: red;
+}
+  
+#scene:hover .bl {
+bottom: -200px;
+left: -200px; 
+box-shadow: 0 0 0 1px darkblue inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 darkblue, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+background-color: blue;
+}
+  
+#scene:hover .br { 
+bottom: -200px;
+right: -200px;
+box-shadow: 0 0 0 1px rgb(0, 82, 0) inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 rgb(0, 82, 0), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+background-color: green;
+}
+
+a:hover:before {
+    display: block;
+}
+
+a:hover span {
+    display: none;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+/* Popup Youtube Player */
+#player-container {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 99;
+    background-color: RGBA(0,0,0,.7)
+}
+
+#player {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.video-container {
+    width: calc(100vw - 177.78px); 
+    height: calc(56.25vw - 100px); /* height:width ratio = 9/16 = .5625  */
+
+    max-height: calc(100vh - 100px);
+    max-width: calc(177.78vh - 177.78px); /* 16/9 = 1.778 */
+    margin: auto;
+    position: absolute;
+    top:0;bottom:0; /* vertical center */
+    left:0;right:0; /* horizontal center */
+}
+
+.video-container iframe, .video-container object, .video-container embed {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+
+#close-video {
+ position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    
+    z-index: 99;
+}
+
+.fa-times-circle {   
+    font-size: 40px;  
+    cursor: pointer;
+}
+
+.fa-times-circle:hover {
+    opacity: .8;
+}
+
+/* *************************** */
+/* Media Queries for Responsiveness */
+@media only screen and (max-width: 790px){
+    #scene:hover .sub-button {
+        height: 100px;
+        width: 100px;
+    }
+
+    #scene:hover .tl {
+        top: -100px;
+        left: -100px;
+    }
+    #scene:hover .tr {
+        top: -100px;
+        right: -100px;
+    }
+    #scene:hover .bl {
+        bottom: -100px;
+        left: -100px;
+    }
+    #scene:hover .br {
+        bottom: -100px;
+        right: -100px;
+    }
+
+    #scene:hover span {
+        font-size: 90%;
+    }
+
+    a:hover:before {
+        display: none;
+    }
+
+    a:hover span {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 380px){
+    h1 {
+        font-size: 200%
+    }
+    .add-button {
+        width: 34px;
+        height: 34px;
+    }
+
+    .add-button:before, 
+    .add-button:after {
+        top: -10px;
+        left: -10px;
+        width: 55px;
+        height: 55px;
+        font-size: 15px;
+        line-height: 50px;
+    }
+    
+    #scene:hover .sub-button {
+        height: 60px;
+        width: 60px;
+    }
+
+    #scene:hover .tl {
+        top: -80px;
+        left: -80px;
+    }
+    #scene:hover .tr {
+        top: -80px;
+        right: -80px;
+    }
+    #scene:hover .bl {
+        bottom: -80px;
+        left: -80px;
+    }
+    #scene:hover .br {
+        bottom: -80px;
+        right: -80px;
+    }
+
+    #scene:hover span {
+        font-size: 50%;
+    }
+}
